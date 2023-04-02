@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knowledge on Azure</title>
+    <link>http://example.org/categories/knowledge/</link>
+    <description>Recent content in Knowledge on Azure</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://example.org/categories/knowledge/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HPC Basics</title>
+      <link>http://example.org/posts/hpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/hpc/</guid>
+      <description>Benchmarks Types of benchmarks Real Applications
+Kernels - prototype
+Most time consuming part of the App
+Synthetic benchmark - design
+Combining several types of basic artificial computer functions in proportions
+Peak performance - marketing
+Not based on actual App
+Component Benchmark
+&amp;hellip;
+Iron law of performance </description>
+    </item>
+    
+    <item>
+      <title>Monad</title>
+      <link>http://example.org/posts/monads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/monads/</guid>
+      <description>&lt;p&gt;&lt;em&gt;A monad is just a monoid in the category of endofunctors, what&amp;rsquo;s the problem?&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

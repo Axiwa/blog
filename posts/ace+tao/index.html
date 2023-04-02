@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>ACE&#43;TAO&#43;OpenDDS安装 | Azure</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="为什么，为什么会变成这样呢&hellip;">
+    <meta name="generator" content="Hugo 0.111.3">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="ACE&#43;TAO&#43;OpenDDS安装" />
+<meta property="og:description" content="为什么，为什么会变成这样呢&hellip;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/ace&#43;tao/" /><meta property="article:section" content="posts" />
+
+
+<meta itemprop="name" content="ACE&#43;TAO&#43;OpenDDS安装">
+<meta itemprop="description" content="为什么，为什么会变成这样呢&hellip;">
+
+<meta itemprop="wordCount" content="68">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ACE&#43;TAO&#43;OpenDDS安装"/>
+<meta name="twitter:description" content="为什么，为什么会变成这样呢&hellip;"/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Azure
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">ACE&#43;TAO&#43;OpenDDS安装</h1>
+      
+      
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>为什么，为什么会变成这样呢&hellip;</p>
+<p>我需要用OpenDDS进行实时的数据处理，使用前要benchmark一下，因此想用自带的performance-tests</p>
+<p>系统 Ubuntu 20.04</p>
+<p>OpenDDS-3.20</p>
+<p>ACE+TAO-7.0.7</p>
+<p><strong>官网：</strong></p>
+<p>最简安装，不需要自己下载编译ACE+TAO，不指定任何configure option。简而言之：下载，解压，进入解压的OpenDDS目录，<code>./configure</code>，<code>make</code>，<code>source setenv.sh</code> 设置环境，测试，成功！</p>
+<p><a href="https://opendds.org/quickstart/GettingStartedLinux.html">https://opendds.org/quickstart/GettingStartedLinux.html</a></p>
+<p>官方Github的文档，告诉你需要什么feature都告诉configure。比如java支持啊，需要自带tests啊，实际的参数都请去相应的文档查阅</p>
+<p><a href="https://github.com/objectcomputing/OpenDDS/blob/master/INSTALL.md">https://github.com/objectcomputing/OpenDDS/blob/master/INSTALL.md</a></p>
+<hr>
+<p>Make life easier:</p>
+<p>configure支持的输入用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./configure --help
+</span></span></code></pre></div><p>CXX标准似乎默认是std=c++11，不放心也可以加上<code>--std=c++11</code></p>
+<p><code>--tests</code> 如果是官网下载解压的文件夹，<code>./configure --tests</code>会报错，请你用 <code>--gtest=???</code> 指定googletest的根目录。比如googletest解压之后有了这个<code>/usr/local/include/gtest</code>，那么<code>--gtest=/usr/local</code>。如果是Github下载的文件夹，终端 <code>git submodule init</code> + <code>git submodule update</code>，再用<code>--tests</code>即可。具体文档：<code>$DDS_ROOT/tests/gtest_setup.txt</code></p>
+<p><strong>网友：</strong></p>
+<p>ACE+TAO自行安装编译</p>
+<p><a href="https://blog.csdn.net/mrliushuaishuai/article/details/118633577">Linux系统下OpenDDS安装及测试2021-07-10</a></p>
+<p>感谢网友的保姆级教程！唯一的问题是我不知道在哪指定<code>no_cxx11=0</code>导致无法手动在tests中build，以及不小心指定了<code>make -B</code>以后所有可以make的全部make，不管怎么<code>make clean</code>也调不回来，一整天也没完成 T_T&hellip;</p>
+<hr>
+<p>Make life easier:</p>
+<p>如果不按照教程里新建<code>$ACE_ROOT/ace/config.h</code>和<code>$ACE_ROOT/include/makeinclude/platform_macros.GNU</code>，仅仅下载，解压，改权限，添加环境变量，然后直接在<code>$DDS_ROOT</code>中<code>./configure</code>的话，将会由它自动添加和修改，可以解决没有用C++11的问题。来自 <a href="https://github.com/objectcomputing/OpenDDS/issues/1842">My system refuses to configure with c++11 #1842 </a></p>
+<p>不想无休止地给ACE和TAO的测试目录make怎么办？参考<code>$TAO_ROOT/TAO-INSTALL.html</code>中“On UNIX platforms”第4条，重新生成吧</p>
+<p>自己怎么指定CXX？ To be continued&hellip;</p>
+<p><strong>运行测试</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd $DDS_ROOT/tests
+</span></span><span style="display:flex;"><span>./auto_run_tests.pl 
+</span></span></code></pre></div><p>test PASSED真是无论何时都那么令人心旷神怡啊</p>
+<p><strong>性能测试</strong></p>
+<p><a href="https://opendds.readthedocs.io/en/latest/internal/bench2.html">https://opendds.readthedocs.io/en/latest/internal/bench2.html</a></p><ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+    &copy;  Azure 2023 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

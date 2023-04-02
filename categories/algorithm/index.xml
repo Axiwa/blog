@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm on Azure</title>
+    <link>http://example.org/categories/algorithm/</link>
+    <description>Recent content in Algorithm on Azure</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://example.org/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Binary Search Tree</title>
+      <link>http://example.org/posts/searchtree/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/searchtree/</guid>
+      <description>Binary Search Tree
+AVL Tree
+BlackRed Tree
+Splay Tree
+B+ Tree</description>
+    </item>
+    
+    <item>
+      <title>KMP算法</title>
+      <link>http://example.org/posts/kmp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/kmp/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/&#34;&gt;KMP Algorithm for Pattern Searching&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;屡看屡忘，屡忘屡看&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>刷题</title>
+      <link>http://example.org/posts/lc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/lc/</guid>
+      <description>&lt;p&gt;正在从 &lt;a href=&#34;https://github.com/youngyangyang04/leetcode-master&#34;&gt;https://github.com/youngyangyang04/leetcode-master&lt;/a&gt; 开始刷题！&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

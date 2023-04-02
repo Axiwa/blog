@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>废话 on Azure</title>
+    <link>http://example.org/categories/%E5%BA%9F%E8%AF%9D/</link>
+    <description>Recent content in 废话 on Azure</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://example.org/categories/%E5%BA%9F%E8%AF%9D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>碎碎念</title>
+      <link>http://example.org/posts/diary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/diary/</guid>
+      <description>&lt;p&gt;正经人谁写日记啊&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

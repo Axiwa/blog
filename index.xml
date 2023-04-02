@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure</title>
+    <link>http://example.org/</link>
+    <description>Recent content on Azure</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ACE&#43;TAO&#43;OpenDDS安装</title>
+      <link>http://example.org/posts/ace&#43;tao/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/ace&#43;tao/</guid>
+      <description>&lt;p&gt;为什么，为什么会变成这样呢&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Binary Search Tree</title>
+      <link>http://example.org/posts/searchtree/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/searchtree/</guid>
+      <description>Binary Search Tree
+AVL Tree
+BlackRed Tree
+Splay Tree
+B+ Tree</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 模板类</title>
+      <link>http://example.org/posts/template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/template/</guid>
+      <description>&lt;p&gt;没怎么用过模板，好多坑啊！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Conjugate gradient implementation</title>
+      <link>http://example.org/posts/conjugate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/conjugate/</guid>
+      <description>https://stackoverflow.com/questions/39274472/error-function-atomicadddouble-double-has-already-been-defined</description>
+    </item>
+    
+    <item>
+      <title>CS440 Rendering Engine</title>
+      <link>http://example.org/posts/cs440/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/cs440/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://pbr-book.org/&#34;&gt;PBRT&lt;/a&gt;的离线渲染引擎，基本框架是&lt;a href=&#34;http://rgl.epfl.ch/software/Nori2&#34;&gt;Nori&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;What we have done in this course and project is to extend this basic renderer to support more full-fledged physically-based lighting/integrating/bsdf functions&amp;hellip;&lt;/p&gt;
+&lt;p&gt;The technical details in this passage may not be perfect.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CS449 notes</title>
+      <link>http://example.org/posts/systemsfordatascience/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/systemsfordatascience/</guid>
+      <description>&lt;p&gt;0603 updated: &lt;a href=&#34;https://juejin.cn/post/6844903553727725582&#34;&gt;https://juejin.cn/post/6844903553727725582&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Euler Angle - Quaternion - Axis Angle</title>
+      <link>http://example.org/posts/rotation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/rotation/</guid>
+      <description>&lt;p&gt;三维旋转&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hair Rendering</title>
+      <link>http://example.org/posts/hair/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/hair/</guid>
+      <description>&lt;p&gt;画头发好好玩呀！&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to create a blog by hexo&amp;github</title>
+      <link>http://example.org/posts/how-to-create-a-blog/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/how-to-create-a-blog/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.wzqj.top/2019/02/26/linux%E4%B8%8B%E4%BD%BF%E7%94%A8-Github-Pages-Hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/&#34;&gt;Creating a blog by hexo&amp;amp;github&lt;/a&gt;
+This article helps a lot.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>HPC Basics</title>
+      <link>http://example.org/posts/hpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/hpc/</guid>
+      <description>Benchmarks Types of benchmarks Real Applications
+Kernels - prototype
+Most time consuming part of the App
+Synthetic benchmark - design
+Combining several types of basic artificial computer functions in proportions
+Peak performance - marketing
+Not based on actual App
+Component Benchmark
+&amp;hellip;
+Iron law of performance </description>
+    </item>
+    
+    <item>
+      <title>KMP算法</title>
+      <link>http://example.org/posts/kmp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/kmp/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/&#34;&gt;KMP Algorithm for Pattern Searching&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;屡看屡忘，屡忘屡看&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>LU分解、Chelosky分解、QR分解</title>
+      <link>http://example.org/posts/cla/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/cla/</guid>
+      <description>&lt;p&gt;花式解决$Ax = b$&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Monad</title>
+      <link>http://example.org/posts/monads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/monads/</guid>
+      <description>&lt;p&gt;&lt;em&gt;A monad is just a monoid in the category of endofunctors, what&amp;rsquo;s the problem?&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>My stackoverflow</title>
+      <link>http://example.org/posts/remember-sth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/remember-sth/</guid>
+      <description>&lt;p&gt;很杂,在搜索栏搜搜&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Neural ODE</title>
+      <link>http://example.org/posts/ode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/ode/</guid>
+      <description>Dynamic system &amp;amp; Machine learning When I was reading the paper Neural Ordinary Differential Equations, I was confused of the adjoint method, so I turned to A Proposal on Machine Learning via Dynamical Systems. It is clearer about what we should do. We begin from the side of dynamical system:
+Consider the differential equation in
+$\frac{dx}{dt} = f(u(t),x), x(0)=x_0, u(t)\in U, t\in [0,T]$
+We want to find the function $u(t)$, defined in $[0,T]$ that minimizes/maximizes</description>
+    </item>
+    
+    <item>
+      <title>Scala notes</title>
+      <link>http://example.org/posts/scalareview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/scalareview/</guid>
+      <description>Elements Evaluation strategy Call-by-value:
+A strict evaluation strategy, in which the expression is evaluated and bound to the corresponding parameter before the function body is evaluated.
+The val form is CBV.
+val z ={ println(&amp;#34;z&amp;#34;); 3 } Running this will give
+z val z: Int = 3 Calling z will not print &amp;ldquo;z&amp;rdquo; because it has been evaluated while defined.
+Scala uses CBV by default.
+Call-by-name:
+A non-strict evaluation strategy which will defer the evaluation of the expression until the program needs it.</description>
+    </item>
+    
+    <item>
+      <title>Vulkan学习(1) Basics</title>
+      <link>http://example.org/posts/vulkanbasic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/vulkanbasic/</guid>
+      <description>&lt;p&gt;照着 &lt;a href=&#34;https://vulkan-tutorial.com/&#34;&gt;https://vulkan-tutorial.com/&lt;/a&gt;画三角形&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>刷题</title>
+      <link>http://example.org/posts/lc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/lc/</guid>
+      <description>&lt;p&gt;正在从 &lt;a href=&#34;https://github.com/youngyangyang04/leetcode-master&#34;&gt;https://github.com/youngyangyang04/leetcode-master&lt;/a&gt; 开始刷题！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>没见过的需求</title>
+      <link>http://example.org/posts/trick/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/trick/</guid>
+      <description>&lt;p&gt;是老板的脑洞太奇葩还是我的经验太少T_T&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>随机数和图形学</title>
+      <link>http://example.org/posts/randomnumber/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/randomnumber/</guid>
+      <description>&lt;p&gt;概率统计苦手每次遇到sampling的东西都一头雾水！&lt;/p&gt;
+&lt;p&gt;动机：跟着PBRT写经典的基于Marschner毛发渲染的时候需要用到4个随机数，可是一般的sample()方程只会传入2个(pbrt)或者3个(mitsuba)随机数。pbrt处理的做法是将随机数$\eta$变成64位的int，然后分别取奇数位的值和偶数位上的数字组成一个32位的数字，就得到了两个随机数！然而，这两个数字是真的均匀分布的随机数吗？&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

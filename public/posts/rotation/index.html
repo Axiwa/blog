@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Euler Angle - Quaternion - Axis Angle | Azure</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="三维旋转">
+    <meta name="generator" content="Hugo 0.111.3">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Euler Angle - Quaternion - Axis Angle" />
+<meta property="og:description" content="三维旋转" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/rotation/" /><meta property="article:section" content="posts" />
+
+
+<meta itemprop="name" content="Euler Angle - Quaternion - Axis Angle">
+<meta itemprop="description" content="三维旋转">
+
+<meta itemprop="wordCount" content="156">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Euler Angle - Quaternion - Axis Angle"/>
+<meta name="twitter:description" content="三维旋转"/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Azure
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Euler Angle - Quaternion - Axis Angle</h1>
+      
+      
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>三维旋转</p>
+<h2 id="euler-angle">Euler Angle</h2>
+<p>每次沿着X/Y/Z轴旋转一个角度，根据旋转的顺序（先绕X旋转后绕Y旋转），旋转轴是global还是local（轴的方向是固定的 or 随着物体转动），每次涉及到什么轴（X-Y-X or X-Y-Z）有12种转动方法。根据涉及到的轴的个数分为<strong>Proper Euler Angle</strong>（绕轴顺序可能为XYX,YXY,XZX,ZXZ,YZY,ZYZ）和<strong>Tait-Brayan Euler Angle</strong>（绕轴顺序可能为XYZ,XZY,YXZ,YZX,ZXY,ZYX）</p>
+<h3 id="外旋右手系yxz">外旋+右手系+YXZ</h3>
+<p>对于外旋，$Y_1X_2Z_3$实际上是先绕Z轴旋转$R_z()$，再绕X轴旋转$R_x()$，再绕Y轴旋转$R_y()$。如果是内旋，则是按照YXZ的顺序旋转</p>
+<p>右手系的旋转矩阵:</p>
+<p>$$
+\begin{aligned}
+R_z(\gamma) = \begin{bmatrix}
+\cos \gamma &amp; -\sin \gamma &amp; 0 \
+\sin \gamma&amp; \cos \gamma &amp; 0 \
+0 &amp; 0 &amp; 1\
+\end{bmatrix} \
+R_x(\beta) = \begin{bmatrix}
+1 &amp; 0 &amp; 0\
+0 &amp; \cos \beta &amp; -\sin \beta \
+0 &amp; \sin \beta &amp; \cos \beta \</p>
+<p>\end{bmatrix} \
+R_y(\alpha) = \begin{bmatrix}
+\cos \alpha &amp; 0 &amp; \sin \alpha \
+0 &amp; 1 &amp; 0 \
+-\sin \alpha &amp; 0 &amp; \cos \alpha\
+\end{bmatrix}
+\end{aligned}
+$$</p>
+<p>如果我们需要旋转一个$\mathbf{x} = \begin{bmatrix} x \ y \ z \end{bmatrix}$ 的向量，则作用在它上面的旋转矩阵为()</p>
+<p>$$
+R = R_yR_xR_z\mathbf{x} = \
+\left[\begin{array}{ccc}
+c_1 c_3+s_1 s_2 s_3 &amp; c_3 s_1 s_2-c_1 s_3 &amp; c_2 s_1 \
+c_2 s_3 &amp; c_2 c_3 &amp; -s_2 \
+c_1 s_2 s_3-s_1 c_3 &amp; s_1 s_3+c_1 c_3 s_2 &amp; c_1 c_2
+\end{array}\right]\mathbf{x}
+$$
+其中$c_1 = cos(\alpha), s_1 = sin(\alpha)$&hellip;</p>
+<p>维基百科: <a href="https://en.wikipedia.org/wiki/Euler_angles">https://en.wikipedia.org/wiki/Euler_angles</a></p>
+<h3 id="万向锁">万向锁</h3><ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+    &copy;  Azure 2023 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

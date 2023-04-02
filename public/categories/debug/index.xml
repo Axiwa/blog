@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Debug on Azure</title>
+    <link>http://example.org/categories/debug/</link>
+    <description>Recent content in Debug on Azure</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://example.org/categories/debug/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ACE&#43;TAO&#43;OpenDDS安装</title>
+      <link>http://example.org/posts/ace&#43;tao/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/ace&#43;tao/</guid>
+      <description>&lt;p&gt;为什么，为什么会变成这样呢&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>My stackoverflow</title>
+      <link>http://example.org/posts/remember-sth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/remember-sth/</guid>
+      <description>&lt;p&gt;很杂,在搜索栏搜搜&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>没见过的需求</title>
+      <link>http://example.org/posts/trick/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/trick/</guid>
+      <description>&lt;p&gt;是老板的脑洞太奇葩还是我的经验太少T_T&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

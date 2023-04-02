@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Neural ODE | Azure</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Dynamic system &amp; Machine learning When I was reading the paper Neural Ordinary Differential Equations, I was confused of the adjoint method, so I turned to A Proposal on Machine Learning via Dynamical Systems. It is clearer about what we should do. We begin from the side of dynamical system:
+Consider the differential equation in
+$\frac{dx}{dt} = f(u(t),x), x(0)=x_0, u(t)\in U, t\in [0,T]$
+We want to find the function $u(t)$, defined in $[0,T]$ that minimizes/maximizes">
+    <meta name="generator" content="Hugo 0.111.3">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Neural ODE" />
+<meta property="og:description" content="Dynamic system &amp; Machine learning When I was reading the paper Neural Ordinary Differential Equations, I was confused of the adjoint method, so I turned to A Proposal on Machine Learning via Dynamical Systems. It is clearer about what we should do. We begin from the side of dynamical system:
+Consider the differential equation in
+$\frac{dx}{dt} = f(u(t),x), x(0)=x_0, u(t)\in U, t\in [0,T]$
+We want to find the function $u(t)$, defined in $[0,T]$ that minimizes/maximizes" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/ode/" /><meta property="article:section" content="posts" />
+
+
+<meta itemprop="name" content="Neural ODE">
+<meta itemprop="description" content="Dynamic system &amp; Machine learning When I was reading the paper Neural Ordinary Differential Equations, I was confused of the adjoint method, so I turned to A Proposal on Machine Learning via Dynamical Systems. It is clearer about what we should do. We begin from the side of dynamical system:
+Consider the differential equation in
+$\frac{dx}{dt} = f(u(t),x), x(0)=x_0, u(t)\in U, t\in [0,T]$
+We want to find the function $u(t)$, defined in $[0,T]$ that minimizes/maximizes">
+
+<meta itemprop="wordCount" content="475">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Neural ODE"/>
+<meta name="twitter:description" content="Dynamic system &amp; Machine learning When I was reading the paper Neural Ordinary Differential Equations, I was confused of the adjoint method, so I turned to A Proposal on Machine Learning via Dynamical Systems. It is clearer about what we should do. We begin from the side of dynamical system:
+Consider the differential equation in
+$\frac{dx}{dt} = f(u(t),x), x(0)=x_0, u(t)\in U, t\in [0,T]$
+We want to find the function $u(t)$, defined in $[0,T]$ that minimizes/maximizes"/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Azure
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Neural ODE</h1>
+      
+      
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h2 id="dynamic-system--machine-learning">Dynamic system &amp; Machine learning</h2>
+<p>When I was reading the paper <a href="https://arxiv.org/abs/1806.07366v4">Neural Ordinary Differential Equations</a>, I was confused of the adjoint method, so I turned to <a href="https://doi.org/10.1007/s40304-017-0103-z">A Proposal on Machine Learning via Dynamical Systems</a>. It is clearer about what we should do. We begin from the side of dynamical system:</p>
+<p>Consider the differential equation in</p>
+<p>$\frac{dx}{dt} = f(u(t),x), x(0)=x_0, u(t)\in U, t\in [0,T]$</p>
+<p>We want to find the function $u(t)$, defined in $[0,T]$ that minimizes/maximizes</p>
+<p>$J(u) = \Psi(x(T))+\int_0^T L(x,u)dt$</p>
+<p>If we fix a time horizon T, there is a mapping:</p>
+<p>$x_0 \rightarrow x(T,x_0)$</p>
+<p>If we consider supervised learning and for each data point $x_0^i$ there is a label $y^i$ associated with it, our question is whether the flow map of a given dynamical system can describe the model properly and to choose $u(t)$ such that a loss function of $x(T, x_0)$ and $y(x_0)$ could be minimized ($\mu(x)$ is the distribution).</p>
+<p>$\int(y(x)-g(x(T)))^2d\mu(x)+\int_0^T L(x,u)dt$
+$= \sum_i(y_i-x_i(T))^2+\int_0^T L(x,u)dt$</p>
+<p>We consider the <a href="https://www.geeksforgeeks.org/residual-networks-resnet-deep-learning/">ResNet</a>:</p>
+<p>$x_{t+1} = x_{t}+f(u(t), x_t)$</p>
+<p>When we use artificial time (adaptively choosing $\Delta t$ -&gt; layers) and there are plenty of layers, then this is the discrete form of our differential equation.</p>
+<p>$\frac{dx}{dt} = f(u(t),x), x(0)=x_0, u(t)\in U, t\in [0,T]$</p>
+<p>Then we can regard $\Psi$ as the loss function and the integral (running cost) as the regularization term, and we could find the similarity between the deep neural network and dynamic systems.</p>
+<h2 id="adjoint-method--optimization">Adjoint method &amp; optimization</h2>
+<p>Why is there adjustment to adj_y? <a href="https://github.com/rtqichen/torchdiffeq/issues/59#issue-452634924">https://github.com/rtqichen/torchdiffeq/issues/59#issue-452634924</a></p>
+<p>ODEint problem: why do we need interpolation? <a href="https://github.com/rtqichen/torchdiffeq/issues/114">https://github.com/rtqichen/torchdiffeq/issues/114</a></p>
+<p>torch.autograd.grad???</p>
+<p>Code 	Math 	Description
+func_eval 	f(t1,y(t1),θ)f(t_1, y(t_1), \theta)f(t1​,y(t1​),θ) 	(arg) The output whose derivative you want.
+y 	y(t1)y(t_1)y(t1​) 	(arg) The state w.r.t to which you want output’s derivative.
+adj_y 	λ(t1)⊺\lambda(t_1)^\intercalλ(t1​)⊺ 	(arg) The free choice adjoint vector/lagrange multiplier.
+vjp_y 	λ(t1)⊺∂f∂y(t1)\lambda(t_1)^\intercal \frac{\partial f}{\partial y(t_1)}λ(t1​)⊺∂y(t1​)∂f​ 	(ret) The vector-Jacobian product.</p>
+<h2 id="optimal-control">Optimal control</h2>
+<p>What we need to do is to optimize $u(t)$ to minimize the $J$. This is a classic optimal control problem, which could be solved when solving the <em>Hamiltonian system</em>. This is the <strong>Pontryagin&rsquo;s maximum principle</strong>.</p>
+<p>If we consider a Lagrangian multiplier vector $\lambda$, and construct the <em>Hamiltonian</em> H:</p>
+<p>$H(x(t),u(t),\lambda(t),t) = \lambda^T(t)f(x(t),u(t))+L(x(t),u(t))$</p>
+<p>Pontryagin&rsquo;s minimum principle states that the optimal state trajectory $x^<em>$, optimal control $u^</em>$, and corresponding Lagrange multiplier vector $\lambda^*$ must minimize the Hamiltonian H so that:</p>
+<p>(1) $H(x^<em>(t), u^</em>,\lambda^<em>,t) \leq H(x^</em>(t),u,\lambda^*,t)$</p>
+<p>(if there is no constraint on $u(t)$, (1) becomes $H_u = 0$)</p>
+<p>(2) $\Psi_T(x(T))+H(T) = 0$</p>
+<p>(3) $-\dot{\lambda}^{T}(t) = H_x(x^<em>(t),u^</em>(t),\lambda(t),t)$</p>
+<p>(4) $\lambda^{T}(T) = \Psi_x(x(T))$</p>
+<p>The meaning of the notation can be found in <a href="https://en.wikipedia.org/wiki/Pontryagin%27s_maximum_principle">https://en.wikipedia.org/wiki/Pontryagin%27s_maximum_principle</a>, and a simplified proof could be found on <a href="https://www.youtube.com/watch?v=i3Ca509ws-c">https://www.youtube.com/watch?v=i3Ca509ws-c</a> and <a href="https://people.kth.se/~aaurell/Courses/SF3971_VTHT15/SMP-intro.pdf">https://people.kth.se/~aaurell/Courses/SF3971_VTHT15/SMP-intro.pdf</a>. But the clearest proof in Chinese for me is &lt;最优控制理论与系统&gt;定理3-6</p>
+<p>From the beginning I thought the adjoint sensitive method is the related to this but it seems not much&hellip;so I just give some links here from this viewpoint.</p>
+<p><a href="https://arxiv.org/abs/1710.09513">Maximum Principle Based Algorithms for Deep Learning</a></p>
+<p><a href="https://arxiv.org/abs/1812.04352">Layer-Parallel Training of Deep Residual Neural Networks</a></p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+    &copy;  Azure 2023 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

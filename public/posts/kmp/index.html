@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>KMP算法 | Azure</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="KMP Algorithm for Pattern Searching
+屡看屡忘，屡忘屡看&hellip;">
+    <meta name="generator" content="Hugo 0.111.3">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="KMP算法" />
+<meta property="og:description" content="KMP Algorithm for Pattern Searching
+屡看屡忘，屡忘屡看&hellip;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/kmp/" /><meta property="article:section" content="posts" />
+
+
+<meta itemprop="name" content="KMP算法">
+<meta itemprop="description" content="KMP Algorithm for Pattern Searching
+屡看屡忘，屡忘屡看&hellip;">
+
+<meta itemprop="wordCount" content="813">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="KMP算法"/>
+<meta name="twitter:description" content="KMP Algorithm for Pattern Searching
+屡看屡忘，屡忘屡看&hellip;"/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Azure
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">KMP算法</h1>
+      
+      
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p><a href="https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/">KMP Algorithm for Pattern Searching</a></p>
+<p>屡看屡忘，屡忘屡看&hellip;</p>
+<p>Pattern 模式串 p[0,1,..m-1]</p>
+<p>Text 主串 t[0,1,&hellip;n-1]</p>
+<p>n&gt;=m</p>
+<p>We would like to check all the occurrences of the patten string in text string.</p>
+<p><strong>Example</strong></p>
+<pre tabindex="0"><code>Input:  t[] = &#34;THIS IS A TEST TEXT&#34;
+        p[] = &#34;TEST&#34;
+
+Output: 10
+</code></pre><p>Using brute force method, for i = 0,1&hellip;n-m, we check if the text t[i,i+1&hellip;i+m-1] is the same as the pattern p[0,1,..m-1] one character by one character.</p>
+<p>The time will be O(m(n-m+1))</p>
+<h2 id="kmp">KMP</h2>
+<p>Let&rsquo;s see an example:</p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;AAAAC&#34;
+</code></pre><p>We want to know how many occurrences of the p are in t.</p>
+<p>We begin from <code>i = 0, j = 0</code>, to check if <code>t[i] == p[j]</code>, if j reaches p.size(), we find one occurrence.</p>
+<p>When <code>i=4, j=4</code>, we have <code>t[i]!=p[j]</code>. In naive algorithm, we will rebegin from <code>i=1, j=0</code>, however, we can observe that if we apply this change, it will still fail at <code>i=4, j=3</code> and we check 3 times additionally before we get the mismatch.</p>
+<p>Is there anything that helps us to know, the first three letters of p is already matched with <code>t[1...3]</code> that we don&rsquo;t need to check them? That is, when we come to <code>p[4]</code> and there is a mismatch, we know we don&rsquo;t need to restart from <code>p[0]</code> but instead, <code>p[3]</code>?</p>
+<p>Yes, if we know <code>p[0...2]</code> == <code>p[1...3]</code>, and if there is a mismatch at <code>p[4]</code> and <code>t[i]</code>, we still know at least <code>p[1...3]</code>, and therefore <code>p[0...2]</code> matches with <code>t[i-3...i-1]</code>. Then we just need to check from <code>t[i]</code> and <code>p[3]</code>. All we need is a table that records the length of the longest prefix that matches with the suffix up to <code>p[j]</code>. We call it <code>next</code>.</p>
+<p>We could see from the example that, if <code>next[i]==j</code>, that means <code>p[0...j-1] = p[i-j...i-1]</code></p>
+<pre tabindex="0"><code>p = &#34;AAAAC&#34;
+next = [0,1,2,3,0]
+</code></pre><p>When we check for <code>t[i]</code> and <code>p[j]</code> and there is a mismatch, from the <code>next</code> table we know <code>t[i-next[j-1]...i-1]</code> and <code>p[0...next[j-1]-1]</code> match, and now what we need to do is to check <code>t[i] == p[next[j-1]]</code></p>
+<p>When t[4]!=p[4]</p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;AAAAC&#34;
+</code></pre><p>Set <code>j</code> to 3 (<code>next[4-1]</code>) and check from <code>t[4]</code> and <code>p[3]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34; AAAAC&#34;
+</code></pre><p>Still mismatch. Set <code>j</code> to 2 and check fomr <code>t[4]</code> and <code>p[2]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;  AAAAC&#34;
+</code></pre><p>Still mismatch. Set <code>j</code> to 1 and check fomr <code>t[4]</code> and <code>p[1]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;   AAAAC&#34;
+</code></pre><p>Still mismatch. Set <code>j</code> to 0 and check fomr <code>t[4]</code> and <code>p[0]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;    AAAAC&#34;
+</code></pre><p>Now <code>j==0</code> and mismatch, do <code>i++</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;     AAAAC&#34;
+</code></pre><p>Find an occurrence and come to <code>i=10, j=5</code>. Since <code>j==p.size()</code>, set <code>j</code> to <code>next[j-1]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;          AAAAC&#34;
+</code></pre><p>Mismatch at <code>j==0</code>, do <code>i++</code>, and we come to and end.</p>
+<h3 id="code">Code</h3>
+<p>Given the <code>next</code> table, <code>t</code> and <code>p</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>t.size()){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (t[i] <span style="color:#f92672">==</span> p[j]){
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (j <span style="color:#f92672">==</span> p.size()){
+</span></span><span style="display:flex;"><span>        occ.push_back(i<span style="color:#f92672">-</span>j);
+</span></span><span style="display:flex;"><span>        j <span style="color:#f92672">=</span> next[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (i<span style="color:#f92672">&lt;</span>t.size() <span style="color:#f92672">&amp;&amp;</span> t[i]<span style="color:#f92672">!=</span>p[j]){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (j<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">=</span> next[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="how-to-get-the-next-table">How to get the <code>next</code> table?</h2>
+<p>We get it by induction. First we know <code>next[0] = 0</code>. Now if we have known <code>next[1...i]</code>, and we want to know <code>next[i+1]</code></p>
+<p>Assume <code>next[i]=k</code>. The simple case is, if <code>p[k] == p[i+1]</code>, then we know <code>p[0...k] = p[0...i+1]</code>, so <code>next[i+1] = next[i]+1</code>.</p>
+<p>What if <code>p[k] != p[i+1]</code>? As the example shows, here <code>?</code> cannot be 6.</p>
+<pre tabindex="0"><code>p = &#34;ABCABDABCABC&#34;
+next = [0,0,0,1,2,0,1,2,3,4,5,?]
+</code></pre><p>Well, now we know <code>p[0...5] != p[6...11]</code>, though <code>p[0...4] == p[6...10]</code>. Is there any shorter but long enough prefix such that <code>p[0...l] = p[10-l...10]</code> so that we could chek if <code>p[l+1] == p[11]</code>?</p>
+<p>Yes, and it is <code>p[0...next[4]-1]</code> because from the definition of <code>next</code> we know <code>p[0...next[4]-1] == p[4-(next[4]-1)...4] == p[10-(next[4]-1)...10]</code>, so <code>p[0...next[4]-1]</code> is a prefix. Why is it long enough? Because we want to find a prefix that match with the suffix of <code>p[...10]</code>, <code>p[0...4]</code> is the longest prefix but <code>p[5] != p[11]</code> so it cannot be used. What is the next longest prefix? It must have the same prefix and suffix of <code>p[0...4]</code>, so we find it by check <code>next</code> at <code>p[4]</code>. <code>next[4]</code> is the length of the prefix so whe prefix is <code>p[0...next[4]-1]</code>. Then we check if <code>p[next[4]] == p[11]</code>, fortunately it matches, so <code>next[11] = next[4]+1</code>. If it does not match, we need to continue looking for shorter prefix, since we have come to <code>p[next[4]-1]</code>, the length of the next prefix is <code>next[next[4]-1]</code>, so every time if next length <code>l</code> is not zero and there is a mismatch, we check for prefix of length <code>next[l-1]</code></p>
+<pre tabindex="0"><code>next[4] = 2
+p = &#34;ABCABDABCABC&#34;
+next = [0,0,0,1,2,0,1,2,3,4,5,3]
+</code></pre><h3 id="code-1">Code</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> next[p.size()];
+</span></span><span style="display:flex;"><span>next[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>p.size()){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (p[i] <span style="color:#f92672">==</span> p[j]){
+</span></span><span style="display:flex;"><span>        next[i] <span style="color:#f92672">=</span> j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (j<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">=</span> next[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>            next[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+    &copy;  Azure 2023 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

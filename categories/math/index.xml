@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Math on Azure</title>
-    <link>http://example.org/categories/math/</link>
+    <link>https://axiwa.github.io/blog/categories/math/</link>
     <description>Recent content in Math on Azure</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://example.org/categories/math/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://axiwa.github.io/blog/categories/math/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LU分解、Chelosky分解、QR分解</title>
-      <link>http://example.org/posts/cla/</link>
+      <link>https://axiwa.github.io/blog/posts/cla/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/posts/cla/</guid>
+      <guid>https://axiwa.github.io/blog/posts/cla/</guid>
       <description>&lt;p&gt;花式解决$Ax = b$&lt;/p&gt;</description>
     </item>
     

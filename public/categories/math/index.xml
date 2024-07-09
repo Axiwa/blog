@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Math on Azure</title>
+    <link>http://localhost:1313/blog/categories/math/</link>
+    <description>Recent content in Math on Azure</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Apr 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/categories/math/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Covariance, Fourier Transform and Antialiasing</title>
+      <link>http://localhost:1313/blog/posts/cov/</link>
+      <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/cov/</guid>
+      <description>A short review of covariance matrix&#xA;A geometric interpretation of the covariance matrix&#xA;中文</description>
+    </item>
+    <item>
+      <title>LU分解、Chelosky分解、QR分解</title>
+      <link>http://localhost:1313/blog/posts/cla/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/cla/</guid>
+      <description>&lt;p&gt;花式解决$Ax = b$&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,18 @@
+baseURL = 'https://axiwa.github.io/blog/'
+languageCode = 'en-us'
+title = 'Azure'
+theme = 'hugo-paper'
+
+[params]
+  github = 'axiwa'
+  avatar = 'https://avatars.githubusercontent.com/u/23453707?s=400&u=54da7b5e1e7d8acd4ddb973963f7d8c4a27bf860&v=4'
+  name = 'Axiwa'
+  bio = 'Hi!'
+  rss = true
+
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "Life"
+    url = "https://axiwa.github.io/"
+    weight = 10

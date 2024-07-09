@@ -1,0 +1,376 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>LU分解、Chelosky分解、QR分解 - Azure</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="花式解决$Ax = b$" />
+  <meta name="author" content="Axiwa" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/blog/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/blog/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://avatars.githubusercontent.com/u/23453707?s=400&amp;u=54da7b5e1e7d8acd4ddb973963f7d8c4a27bf860&amp;v=4" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/blog/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/blog/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/blog/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/blog/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/blog/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.128.2">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/blog/"
+      >Azure</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://axiwa.github.io/"
+        >Life</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/axiwa"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="http://localhost:1313/blog/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">LU分解、Chelosky分解、QR分解</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>May 30, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>花式解决$Ax = b$</p>
+<p><a href="https://courses.engr.illinois.edu/cs357/sp2020">LU Decomposition for Solving Linear Equations</a></p>
+<p><a href="https://www.cnblogs.com/bigmonkey/p/9555710.html">线性代数笔记10——矩阵的LU分解</a></p>
+<p><a href="https://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/matrix-solve.html">线性方程组求解与LU分解</a></p>
+<h2 id="gauss-elimination">Gauss Elimination</h2>
+<p>Suppose we have a set of linear equations:</p>
+<p><code>$$ \begin{bmatrix} a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; .. &amp; .. \\ .. &amp;  &amp;  &amp;  \\ &amp;  &amp;  &amp; a_{nn} \\ \end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ ..\\ x_n \end{bmatrix} = \begin{bmatrix} b_1\\ b_2\\ ..\\ b_n \end{bmatrix} $$</code></p>
+<p>The most brute force way is to eliminate one variable each row from top to bottom, and then plug in the sovled variable to previous ones from bottom to top. It is something like this:</p>
+<p>Step 1: Let each row except 1st do not contain $x_1$. Then eliminate $x_2$ in each row except 1st and 2nd</p>
+<p><code>$$ \begin{bmatrix} a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\ 0 &amp; a_{22}-a_{12}\frac{a_{21}}{a_{11}} &amp; .. &amp; .. \\ .. &amp;  &amp;  &amp;  \\ 0 &amp;  &amp;  &amp; a_{nn}-a_{1n}\frac{a_{n1}}{a_{11}} \\ \end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ ..\\ x_n \end{bmatrix} = \begin{bmatrix} b_1\\ b_2-b_1\frac{a_{21}}{a_{11}}\\ ..\\ b_n-b_1\frac{a_{n1}}{a_{11}} \end{bmatrix} $$</code></p>
+<p><code>$$ \begin{bmatrix} a_{11} &amp; a_{12} &amp; .. &amp; a_{1n} \\ 0 &amp; a_{22}-a_{12}\frac{a_{21}}{a_{11}} &amp; .. &amp; .. \\ 0 &amp; 0 &amp; a_{33}-a_{13}\frac{a_{31}}{a_{11}}-(a_{23}-a_{13}\frac{a_{21}}{a_{11}})\frac{a_{32}-a_{12}\frac{a_{31}}{a_{11}}}{a_{22}-a_{12}\frac{a_{21}}{a_{11}}} &amp;  \\ .. &amp; .. &amp;  &amp;  \\ 0 &amp; 0 &amp;  &amp; a_{nn}-a_{1n}\frac{a_{n1}}{a_{11}}-(a_{2n}-a_{1n}\frac{a_{21}}{a_{11}})\frac{a_{n2}-a_{12}\frac{a_{n1}}{a_{11}}}{a_{22}-a_{12}\frac{a_{21}}{a_{11}}} \\ \end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ ..\\ x_n \end{bmatrix} $$</code></p>
+<p><code>$$ = \begin{bmatrix} b_1\\ b_2-b_1\frac{a_{21}}{a_{11}}\\ ..\\ b_n-b_1\frac{a_{n1}}{a_{11}}-(b_2-b_1\frac{a_{21}}{a_{11}})\frac{a_{n2}-a_{12}\frac{a_{n1}}{a_{11}}}{a_{22}-a_{12}\frac{a_{21}}{a_{11}}} \end{bmatrix} $$</code></p>
+<p>If every time the denominator is not zero, finally we will get an upper matrix
+<code>$$ \begin{bmatrix} u_{11} &amp; u_{12} &amp; .. &amp; u_{1n} \\ 0 &amp; u_{22} &amp; .. &amp; .. \\ .. &amp;  &amp;  &amp;  \\ 0 &amp;  &amp;  &amp; u_{nn} \\ \end{bmatrix}\begin{bmatrix} x_1\\ x_2\\ ..\\ x_n \end{bmatrix} = \begin{bmatrix} \widetilde{b_1}\\ \widetilde{b_2}\\ ..\\ \widetilde{b_n} \end{bmatrix} $$</code></p>
+<p>This process can be seen as</p>
+<p><code>$$ \begin{aligned} E_1Ax = E_1b \\ E_2E_1Ax = E_2E_1b\\ \cdots \\ E_n..E_1Ax = E_n...E_1b = Ux\\ (E_n...E_1)^{-1}Ux = b \\ LUx = b \end{aligned} $$</code></p>
+<p>where $E_i$</p>
+<p><code>$$ E_1 = \begin{bmatrix} 1 &amp; 0 &amp; ...&amp;0\\ -\frac{a_{21}}{a_{11}} &amp; 1 &amp; ...&amp;0 \\ -\frac{a_{31}}{a_{11}}&amp;0&amp;1...&amp;0\\ ...\\ -\frac{a_{n1}}{a_{11}}&amp;..&amp;&amp;1 \end{bmatrix} $$</code></p>
+<p><code>$$ E_2 = \begin{bmatrix} 1 &amp; 0 &amp; ...&amp;0\\ 0 &amp; 1 &amp; ...&amp;0 \\ 0&amp; -\frac{a_{32}-a_{12} \frac{a_{31}}{a_{11}}}{a_{22}-a_{12} \frac{a_{21}}{a_{11}}}  &amp;1...&amp;0\\ ...\\ 0&amp;-\frac{a_{n 2}-a_{12} \frac{a_{n 1}}{a_{11}}}{a_{22}-a_{12} \frac{a_{21}}{a_{11}}}&amp;&amp;1 \end{bmatrix} $$</code></p>
+<p>&hellip;</p>
+<p>are lower triangular matrix that eliminates the element in one column. The inverse of a lower triangular matrix is still lower triangular matrix, so A can be decomposed as $A = LU$ where $L$ is a lower triangular matrix and $U$ is an upper triangular matrix. However, what if in this process an element on the diagonal (for example at row i) is zero? We are sure that there would be a row (row &gt; i) that has non-zero at col i (otherwise A is not invertable). We then exchange this two rows using a perturbation matrix $P_i$ that reorders the rows of A.</p>
+<p><code>$$ ...E_iP(i, s_i)...A = ...E_iP(i, s_i)...b $$</code></p>
+<p>For every row, we can exchange two rows using $P_i$ such that the current row i has the largest absolute value of i th column element. This is called &ldquo;Pivoting&rdquo;. It can be proved(<a href="https://link.zhihu.com/?target=https%3A//www.amazon.com/Numerical-Linear-Algebra-Lloyd-Trefethen/dp/0898713617">https://link.zhihu.com/?target=https%3A//www.amazon.com/Numerical-Linear-Algebra-Lloyd-Trefethen/dp/0898713617</a>) that</p>
+<p><code>$$ PA = LU $$</code></p>
+<p>where</p>
+<p><code>$$ P=P\left(n-1, s_{n-1}\right) \ldots P\left(2, s_{2}\right) P\left(1, s_{1}\right) $$</code></p>
+<p>The first step uses $2n(n-1)$ operations (multiplication + addition = 2 floating-point operations), the second uses $2(n-1)(n-2)$&hellip; so Step 1 uses ~ $O(2n^3/3)$</p>
+<p>Step 2:</p>
+<p>Now we can solve $x_n$ using $u_{nn}x_n = \widetilde{b_n}$. Then we plug $x_n$ to the second last row we can solve $x_{n-1}$, and so on&hellip; by back substitution we can solve $Ub = \widetilde{b}$ in $O(n^2)$</p>
+<h2 id="lu-decomposition">LU decomposition</h2>
+<p>We have seen that an invertable matrix A can be decomposed to $(P^{T})LU$. How can we get $P, L, U$?</p>
+<h3 id="by-gauss-elimination">By Gauss elimination</h3>
+<p>From Gauss elimination we know
+<code>$$ L = E^{-1}_1E^{-1}_2...E^{-1}_n $$</code></p>
+<p>And we can get $L$ by multiplication and inverse of these lower triangular matrices. Note that for lower triangular matrices $E_i$ with diagnal element 1, the inverse and multiplication is quite simple, and we can build $L$ with $E_i$(<a href="https://zhuanlan.zhihu.com/p/84210687">https://zhuanlan.zhihu.com/p/84210687</a>). Thus the complexity of LU decomposition and solve this linear equation is</p>
+<ol>
+<li>
+<p>LU decomposition: $2n^2/3$</p>
+</li>
+<li>
+<p>Solve $Ly = b$: $n^2$</p>
+</li>
+<li>
+<p>Solve $Ux = y$: $n^2$</p>
+</li>
+</ol>
+<p>We use LU decomposition but not Gauss elimination because we don&rsquo;t want to bother to modify $b$ every time, especially when we have many different $b$</p>
+<h3 id="by-recursion">By recursion</h3>
+<p>???</p>
+<h2 id="lup-decomposition">LUP decomposition</h2>
+<p>Every time we left-multiply a perturbation matrix $P$ and get</p>
+<p><code>$$ E_{n-1} P_{n-1} \ldots E_{2} P_{2} E_{1} P_{1} A=U $$</code>
+=&gt;
+<code>$$ PA = LU,\text { where } P=\prod_{i=1}^{n-1} P_{i} $$</code></p>
+<p>Though swapping two rows each time, the complexity is still $O(2n^3/3)$ (我觉得好像是这样&hellip;最多多出来$O(n^2)$次操作&hellip;)</p>
+<h3 id="by-recursion-1">By recursion</h3></section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/blog/posts/ace&#43;tao/"
+      ><span class="mr-1.5">←</span><span>ACE&#43;TAO&#43;OpenDDS安装</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/blog/posts/searchtree/"
+      ><span>Binary Search Tree</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/blog/">Azure</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

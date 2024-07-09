@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knowledge on Azure</title>
+    <link>http://localhost:1313/blog/categories/knowledge/</link>
+    <description>Recent content in Knowledge on Azure</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/categories/knowledge/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HPC Basics</title>
+      <link>http://localhost:1313/blog/posts/hpc/</link>
+      <pubDate>Thu, 14 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/hpc/</guid>
+      <description>Benchmarks Types of benchmarks Real Applications&#xA;Kernels - prototype&#xA;Most time consuming part of the App&#xA;Synthetic benchmark - design&#xA;Combining several types of basic artificial computer functions in proportions&#xA;Peak performance - marketing&#xA;Not based on actual App&#xA;Component Benchmark&#xA;&amp;hellip;&#xA;Iron law of performance </description>
+    </item>
+    <item>
+      <title>Monad</title>
+      <link>http://localhost:1313/blog/posts/monads/</link>
+      <pubDate>Thu, 14 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/monads/</guid>
+      <description>&lt;p&gt;&lt;em&gt;A monad is just a monoid in the category of endofunctors, what&amp;rsquo;s the problem?&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

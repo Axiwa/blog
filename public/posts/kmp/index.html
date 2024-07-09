@@ -1,0 +1,420 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+>
+  <head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>KMP算法 - Azure</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="KMP Algorithm for Pattern Searching
+屡看屡忘，屡忘屡看&hellip;" />
+  <meta name="author" content="Axiwa" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/blog/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/blog/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://avatars.githubusercontent.com/u/23453707?s=400&amp;u=54da7b5e1e7d8acd4ddb973963f7d8c4a27bf860&amp;v=4" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/blog/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/blog/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/blog/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/blog/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/blog/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.128.2">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/blog/"
+      >Azure</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://axiwa.github.io/"
+        >Life</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/axiwa"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="http://localhost:1313/blog/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">KMP算法</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Apr 14, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p><a href="https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/">KMP Algorithm for Pattern Searching</a></p>
+<p>屡看屡忘，屡忘屡看&hellip;</p>
+<p>Pattern 模式串 p[0,1,..m-1]</p>
+<p>Text 主串 t[0,1,&hellip;n-1]</p>
+<p>n&gt;=m</p>
+<p>We would like to check all the occurrences of the patten string in text string.</p>
+<p><strong>Example</strong></p>
+<pre tabindex="0"><code>Input:  t[] = &#34;THIS IS A TEST TEXT&#34;
+        p[] = &#34;TEST&#34;
+
+Output: 10
+</code></pre><p>Using brute force method, for i = 0,1&hellip;n-m, we check if the text t[i,i+1&hellip;i+m-1] is the same as the pattern p[0,1,..m-1] one character by one character.</p>
+<p>The time will be O(m(n-m+1))</p>
+<h2 id="kmp">KMP</h2>
+<p>Let&rsquo;s see an example:</p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;AAAAC&#34;
+</code></pre><p>We want to know how many occurrences of the p are in t.</p>
+<p>We begin from <code>i = 0, j = 0</code>, to check if <code>t[i] == p[j]</code>, if j reaches p.size(), we find one occurrence.</p>
+<p>When <code>i=4, j=4</code>, we have <code>t[i]!=p[j]</code>. In naive algorithm, we will rebegin from <code>i=1, j=0</code>, however, we can observe that if we apply this change, it will still fail at <code>i=4, j=3</code> and we check 3 times additionally before we get the mismatch.</p>
+<p>Is there anything that helps us to know, the first three letters of p is already matched with <code>t[1...3]</code> that we don&rsquo;t need to check them? That is, when we come to <code>p[4]</code> and there is a mismatch, we know we don&rsquo;t need to restart from <code>p[0]</code> but instead, <code>p[3]</code>?</p>
+<p>Yes, if we know <code>p[0...2]</code> == <code>p[1...3]</code>, and if there is a mismatch at <code>p[4]</code> and <code>t[i]</code>, we still know at least <code>p[1...3]</code>, and therefore <code>p[0...2]</code> matches with <code>t[i-3...i-1]</code>. Then we just need to check from <code>t[i]</code> and <code>p[3]</code>. All we need is a table that records the length of the longest prefix that matches with the suffix up to <code>p[j]</code>. We call it <code>next</code>.</p>
+<p>We could see from the example that, if <code>next[i]==j</code>, that means <code>p[0...j-1] = p[i-j...i-1]</code></p>
+<pre tabindex="0"><code>p = &#34;AAAAC&#34;
+next = [0,1,2,3,0]
+</code></pre><p>When we check for <code>t[i]</code> and <code>p[j]</code> and there is a mismatch, from the <code>next</code> table we know <code>t[i-next[j-1]...i-1]</code> and <code>p[0...next[j-1]-1]</code> match, and now what we need to do is to check <code>t[i] == p[next[j-1]]</code></p>
+<p>When t[4]!=p[4]</p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;AAAAC&#34;
+</code></pre><p>Set <code>j</code> to 3 (<code>next[4-1]</code>) and check from <code>t[4]</code> and <code>p[3]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34; AAAAC&#34;
+</code></pre><p>Still mismatch. Set <code>j</code> to 2 and check fomr <code>t[4]</code> and <code>p[2]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;  AAAAC&#34;
+</code></pre><p>Still mismatch. Set <code>j</code> to 1 and check fomr <code>t[4]</code> and <code>p[1]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;   AAAAC&#34;
+</code></pre><p>Still mismatch. Set <code>j</code> to 0 and check fomr <code>t[4]</code> and <code>p[0]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;    AAAAC&#34;
+</code></pre><p>Now <code>j==0</code> and mismatch, do <code>i++</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;     AAAAC&#34;
+</code></pre><p>Find an occurrence and come to <code>i=10, j=5</code>. Since <code>j==p.size()</code>, set <code>j</code> to <code>next[j-1]</code></p>
+<pre tabindex="0"><code>t = &#34;AAAABAAAACB&#34;
+p = &#34;          AAAAC&#34;
+</code></pre><p>Mismatch at <code>j==0</code>, do <code>i++</code>, and we come to and end.</p>
+<h3 id="code">Code</h3>
+<p>Given the <code>next</code> table, <code>t</code> and <code>p</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>t.size()){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (t[i] <span style="color:#f92672">==</span> p[j]){
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (j <span style="color:#f92672">==</span> p.size()){
+</span></span><span style="display:flex;"><span>        occ.push_back(i<span style="color:#f92672">-</span>j);
+</span></span><span style="display:flex;"><span>        j <span style="color:#f92672">=</span> next[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (i<span style="color:#f92672">&lt;</span>t.size() <span style="color:#f92672">&amp;&amp;</span> t[i]<span style="color:#f92672">!=</span>p[j]){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (j<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">=</span> next[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="how-to-get-the-next-table">How to get the <code>next</code> table?</h2>
+<p>We get it by induction. First we know <code>next[0] = 0</code>. Now if we have known <code>next[1...i]</code>, and we want to know <code>next[i+1]</code></p>
+<p>Assume <code>next[i]=k</code>. The simple case is, if <code>p[k] == p[i+1]</code>, then we know <code>p[0...k] = p[0...i+1]</code>, so <code>next[i+1] = next[i]+1</code>.</p>
+<p>What if <code>p[k] != p[i+1]</code>? As the example shows, here <code>?</code> cannot be 6.</p>
+<pre tabindex="0"><code>p = &#34;ABCABDABCABC&#34;
+next = [0,0,0,1,2,0,1,2,3,4,5,?]
+</code></pre><p>Well, now we know <code>p[0...5] != p[6...11]</code>, though <code>p[0...4] == p[6...10]</code>. Is there any shorter but long enough prefix such that <code>p[0...l] = p[10-l...10]</code> so that we could chek if <code>p[l+1] == p[11]</code>?</p>
+<p>Yes, and it is <code>p[0...next[4]-1]</code> because from the definition of <code>next</code> we know <code>p[0...next[4]-1] == p[4-(next[4]-1)...4] == p[10-(next[4]-1)...10]</code>, so <code>p[0...next[4]-1]</code> is a prefix. Why is it long enough? Because we want to find a prefix that match with the suffix of <code>p[...10]</code>, <code>p[0...4]</code> is the longest prefix but <code>p[5] != p[11]</code> so it cannot be used. What is the next longest prefix? It must have the same prefix and suffix of <code>p[0...4]</code>, so we find it by check <code>next</code> at <code>p[4]</code>. <code>next[4]</code> is the length of the prefix so whe prefix is <code>p[0...next[4]-1]</code>. Then we check if <code>p[next[4]] == p[11]</code>, fortunately it matches, so <code>next[11] = next[4]+1</code>. If it does not match, we need to continue looking for shorter prefix, since we have come to <code>p[next[4]-1]</code>, the length of the next prefix is <code>next[next[4]-1]</code>, so every time if next length <code>l</code> is not zero and there is a mismatch, we check for prefix of length <code>next[l-1]</code></p>
+<pre tabindex="0"><code>next[4] = 2
+p = &#34;ABCABDABCABC&#34;
+next = [0,0,0,1,2,0,1,2,3,4,5,3]
+</code></pre><h3 id="code-1">Code</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> next[p.size()];
+</span></span><span style="display:flex;"><span>next[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>p.size()){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (p[i] <span style="color:#f92672">==</span> p[j]){
+</span></span><span style="display:flex;"><span>        next[i] <span style="color:#f92672">=</span> j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (j<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">=</span> next[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>            next[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/blog/posts/hpc/"
+      ><span class="mr-1.5">←</span><span>HPC Basics</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="http://localhost:1313/blog/posts/monads/"
+      ><span>Monad</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/blog/">Azure</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

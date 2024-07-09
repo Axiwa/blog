@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computer Graphics on Azure</title>
+    <link>http://localhost:1313/blog/categories/computer-graphics/</link>
+    <description>Recent content in Computer Graphics on Azure</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 02 Apr 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/categories/computer-graphics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Euler Angle - Quaternion - Axis Angle</title>
+      <link>http://localhost:1313/blog/posts/rotation/</link>
+      <pubDate>Sun, 02 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/rotation/</guid>
+      <description>&lt;p&gt;三维旋转&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hair Rendering</title>
+      <link>http://localhost:1313/blog/posts/hair/</link>
+      <pubDate>Sun, 02 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/hair/</guid>
+      <description>&lt;p&gt;画头发好好玩呀！&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;../../images/1_m.png&#34; alt=&#34;&#34;&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vulkan学习(1) Basics</title>
+      <link>http://localhost:1313/blog/posts/vulkanbasic/</link>
+      <pubDate>Sun, 02 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/vulkanbasic/</guid>
+      <description>&lt;p&gt;照着 &lt;a href=&#34;https://vulkan-tutorial.com/&#34;&gt;https://vulkan-tutorial.com/&lt;/a&gt;画三角形&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>随机数和图形学</title>
+      <link>http://localhost:1313/blog/posts/randomnumber/</link>
+      <pubDate>Sat, 10 Dec 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/randomnumber/</guid>
+      <description>&lt;p&gt;概率统计苦手每次遇到sampling的东西都一头雾水！&lt;/p&gt;&#xA;&lt;p&gt;动机：跟着PBRT写经典的基于Marschner毛发渲染的时候需要用到4个随机数，可是一般的sample()方程只会传入2个(pbrt)或者3个(mitsuba)随机数。pbrt处理的做法是将随机数$\eta$变成64位的int，然后分别取奇数位的值和偶数位上的数字组成一个32位的数字，就得到了两个随机数！然而，这两个数字是真的均匀分布的随机数吗？&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

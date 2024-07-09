@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lecture Notes on Azure</title>
+    <link>http://localhost:1313/blog/categories/lecture-notes/</link>
+    <description>Recent content in Lecture Notes on Azure</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 02 Apr 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/categories/lecture-notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CS449 notes</title>
+      <link>http://localhost:1313/blog/posts/systemsfordatascience/</link>
+      <pubDate>Sun, 02 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/systemsfordatascience/</guid>
+      <description>&lt;p&gt;0603 updated: &lt;a href=&#34;https://juejin.cn/post/6844903553727725582&#34;&gt;https://juejin.cn/post/6844903553727725582&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Scala notes</title>
+      <link>http://localhost:1313/blog/posts/scalareview/</link>
+      <pubDate>Sun, 02 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/scalareview/</guid>
+      <description>Elements Evaluation strategy Call-by-value:&#xA;A strict evaluation strategy, in which the expression is evaluated and bound to the corresponding parameter before the function body is evaluated.&#xA;The val form is CBV.&#xA;val z ={ println(&amp;#34;z&amp;#34;); 3 } Running this will give&#xA;z val z: Int = 3 Calling z will not print &amp;ldquo;z&amp;rdquo; because it has been evaluated while defined.&#xA;Scala uses CBV by default.&#xA;Call-by-name:&#xA;A non-strict evaluation strategy which will defer the evaluation of the expression until the program needs it.</description>
+    </item>
+  </channel>
+</rss>

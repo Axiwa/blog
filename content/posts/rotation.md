@@ -9,14 +9,6 @@ markup: pandoc
 
 <!--more-->
 
-$$
-\begin{aligned}
-L(\mathbf{x}, \vec{\omega}) &=T\_{r}\left(\mathbf{x}, \mathbf{x}\_{z}\right) L\left(\mathbf{x}\_{z}, \vec{\omega}\right) \\\
-&+\int\_{0}^{z} T\_{r}\left(\mathbf{x}, \mathbf{x}\_{t}\right) \sigma\_{s}\left(\mathbf{x}\_{t}\right) \int\_{S^{2}} f_{p}\left(\mathbf{x}_{t}, \vec{\omega}^{\prime}, \vec{\omega}\right) L_{i}\left(\mathbf{x}_{t}, \vec{\omega}^{\prime}\right) d \vec{\omega}^{\prime} d t
-\end{aligned}
-$$
-
-
 ## Euler Angle
 每次沿着X/Y/Z轴旋转一个角度，根据旋转的顺序（先绕X旋转后绕Y旋转），旋转轴是global还是local（轴的方向是固定的 or 随着物体转动），每次涉及到什么轴（X-Y-X or X-Y-Z）有12种转动方法。根据涉及到的轴的个数分为**Proper Euler Angle**（绕轴顺序可能为XYX,YXY,XZX,ZXZ,YZY,ZYZ）和**Tait-Brayan Euler Angle**（绕轴顺序可能为XYZ,XZY,YXZ,YZX,ZXY,ZYX）
 

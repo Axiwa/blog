@@ -287,7 +287,7 @@ Curly hair under point light (1) Hair with front scattering (2) PBRT's Hair with
 
 Hair scene under constant lighting. (1) $\sigma_a = [2, 2, 2]$ (2) $\sigma_a = [0, 0, 0]$ 
 
-We can also see "white furnace" test under the complex scattering condition\ref{white}. With constant lighting, the hair with zero absorption coefficient will disappear, because the incident energy is equal to the outgoing energy.
+We can also see "white furnace" test under the complex scattering condition. With constant lighting, the hair with zero absorption coefficient will disappear, because the incident energy is equal to the outgoing energy.
 
 ---
 

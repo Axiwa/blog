@@ -1,6 +1,6 @@
 ---
 title: 随机数和图形学
-categories: Computer graphics
+categories: CG
 date: 2022-12-10
 ---
 

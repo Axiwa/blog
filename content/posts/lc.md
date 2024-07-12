@@ -1,8 +1,9 @@
 ---
 title: 刷题
-mathjax: true
 categories: Algorithm
 date: 2022-04-14
+katex: true
+markup: pandoc
 ---
 
 正在从 <https://github.com/youngyangyang04/leetcode-master> 开始刷题！

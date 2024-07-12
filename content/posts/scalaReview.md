@@ -668,7 +668,7 @@ ScalaCheck
 ```scala
 s"${}....${}"
 ```
-`s` means where the string begins, and everything in the braces following a `$` will be interpreted as an expression evaluated.
+`s` means where the string begins, and everything in the braces following a $ will be interpreted as an expression evaluated.
 
 ## override def
 Not to use default methods but our own methods.

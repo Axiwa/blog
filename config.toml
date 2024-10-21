@@ -11,12 +11,12 @@ theme = 'hugo-paper'
   rss = true
   math = true
 
-[menu]
-  [[menu.main]]
-    identifier = "about"
-    name = "Life"
-    url = "https://axiwa.github.io/"
-    weight = 10
+# [menu]
+#   [[menu.main]]
+#     identifier = "about"
+#     name = "Life"
+#     url = "https://axiwa.github.io/"
+#     weight = 10
 
 [security]
   enableInlineShortcodes = false
